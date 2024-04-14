@@ -1,0 +1,58 @@
+name: Lint/Tests CI Workflow
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ssh-key: "${{ secrets.COMMIT_KEY }}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Get npm-cache folder
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}  # by default, it should be ~/.npm
+
+      - name: Restore npm cache
+        id: npm-cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm ci
+
+      - name: Save npm cache
+        id: npm-cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #          key: ${{ steps.npm-cache-restore.outputs.cache-primary-key }}
+
+      - run: npm run lint
+
+      - run: npm run test
+
+      - run: npm run build

@@ -1,9 +1,17 @@
-export type Json = string | number | boolean | { [x: string]: Json } | Array<Json>;
+export type TMeta = Json; // | Error
 
-type LogMethod = (message: string, meta?: Json) => void;
+export type LogMethod = (message: string, meta?: TMeta) => void;
 
 export interface ILogger {
   fatal: LogMethod;
   error: LogMethod;
-  // todo:
+  // todo: define final interface
 }
+
+// prettier-ignore
+export type Json =
+  | string
+  | number
+  | boolean
+  | { [key: string]: Json }
+  | Array<Json>;

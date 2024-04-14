@@ -1,12 +1,6 @@
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    // 'prettier'
-  ],
-  plugins: [
-    '@typescript-eslint'
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -15,7 +9,7 @@ module.exports = {
   },
   rules: {
     quotes: ['error', 'single', { avoidEscape: true }],
-    'quote-props': ['error', 'as-needed']
+    'quote-props': ['error', 'as-needed'],
   },
   env: {
     node: true,
@@ -32,6 +26,7 @@ module.exports = {
       parserOptions: {
         project: './tsconfig.test.json',
       },
-    }
+    },
   ],
+  ignorePatterns: ['node_modules/', 'dist/'],
 };

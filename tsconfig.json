@@ -5,7 +5,7 @@
     "noUncheckedIndexedAccess": true,
     "lib": ["esNext"],
     "target": "esNext",
-    "module": "esNext",
+    "module": "nodeNext",
     "moduleResolution": "nodeNext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,10 +15,6 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": [
-    "src/**/*.*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
