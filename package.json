@@ -3,12 +3,15 @@
   "description": "Logger with context",
   "version": "0.1.0",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "start:dev": "ts-node src/index.ts",
     "test": "jest --testMatch='**/test/**/*.test.ts'",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "build": "tsc",
+    "build": "tsup",
     "prepare": "husky || true"
   },
   "devDependencies": {
@@ -24,6 +27,7 @@
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   },
   "lint-staged": {
@@ -38,5 +42,12 @@
     "context"
   ],
   "author": "geka.evk@gmail.com",
-  "license": "ISC"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geka-evk/context-logger.git"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }
