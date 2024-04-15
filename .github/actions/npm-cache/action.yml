@@ -1,0 +1,20 @@
+name: 'get-npm-cache Action'
+description: 'Retrieve and restore NPM cache'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Get npm-cache folder
+      id: npm-cache-dir
+      shell: bash
+      run: |
+        echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+      # by default, it should be ~/.npm
+
+    - name: Restore npm cache
+      id: npm-cache-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
