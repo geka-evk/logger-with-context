@@ -27,26 +27,9 @@ jobs:
           fetch-depth: 0
           ssh-key: "${{ secrets.COMMIT_KEY }}"
 
-#      - name: Setup Node
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#          cache: 'npm'
-
       - name: Use get-npm-cache Action
         uses: ./.github/actions/npm-cache
-
-#      - name: Get npm-cache folder
-#        id: npm-cache-dir
-#        shell: bash
-#        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}  # by default, it should be ~/.npm
-#
-#      - name: Restore npm cache
-#        id: npm-cache-restore
-#        uses: actions/cache/restore@v4
-#        with:
-#          path: ${{ steps.npm-cache-dir.outputs.dir }}
-#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        id: npm-cache-dir
 
       - run: npm ci
 
@@ -63,9 +46,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-#      - uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
 
       - name: Use get-npm-cache Action
         uses: ./.github/actions/npm-cache
