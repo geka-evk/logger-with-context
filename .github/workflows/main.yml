@@ -33,7 +33,8 @@ jobs:
 
       - run: npm ci
 
-      - run: echo "DIR=${{ steps.npm-cache-dir.outputs.cache-dir }}"
+      - run: echo DIR is ${{ steps.npm-cache-dir.outputs.cache-dir }}
+        shell: bash
 
       - name: Save npm cache
         id: npm-cache-save

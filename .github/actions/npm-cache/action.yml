@@ -1,6 +1,11 @@
 name: 'get-npm-cache Action'
 description: 'Retrieve and restore NPM cache'
 
+outputs:
+  cache-dir:
+    value: ${{ steps.npm-cache-dir.outputs.cache-dir }}
+    description: 'NPM cache directory'
+
 runs:
   using: 'composite'
 
