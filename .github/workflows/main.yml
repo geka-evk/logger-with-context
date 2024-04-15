@@ -30,17 +30,12 @@ jobs:
       - name: Use get-npm-cache Action
         id: npm-cache-dir
         uses: ./.github/actions/npm-cache
-
       - run: npm ci
-
-      - run: echo DIR is ${{ steps.npm-cache-dir.outputs.cache-dir }}
-        shell: bash
 
       - name: Save npm cache
         id: npm-cache-save
         uses: actions/cache/save@v4
         with:
-#          path: ${{ steps.npm-cache-dir.outputs.dir }}
           path: ${{ steps.npm-cache-dir.outputs.cache-dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
@@ -53,7 +48,6 @@ jobs:
 
       - name: Use get-npm-cache Action
         uses: ./.github/actions/npm-cache
-
       - run: npm ci
 
       - run: npm run lint
@@ -65,17 +59,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-#      - uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#          registry-url: 'https://registry.npmjs.org'
 
       - name: Use get-npm-cache Action
         uses: ./.github/actions/npm-cache
-
       - run: npm ci
-      - run: npm run build
 
+      - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
