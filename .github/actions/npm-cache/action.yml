@@ -16,7 +16,7 @@ runs:
     - name: Get npm-cache folder
       id: npm-cache-dir
       shell: bash
-      run: echo "{cache-dir}={$(npm config get cache)}" >> $GITHUB_OUTPUT
+      run: echo "cache-dir=$(npm config get cache)" >> $GITHUB_OUTPUT
 #      run: |
 #        echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
 #        echo "::set-output name=cache-dir::$(npm config get cache)"
