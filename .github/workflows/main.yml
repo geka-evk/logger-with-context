@@ -33,12 +33,14 @@ jobs:
 
       - run: npm ci
 
+      - run: echo "DIR=${{ steps.npm-cache-dir.outputs.cache-dir }}"
+
       - name: Save npm cache
         id: npm-cache-save
         uses: actions/cache/save@v4
         with:
 #          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          path: ${{ steps.npm-cache-action.outputs.cache-dir }}
+          path: ${{ steps.npm-cache-dir.outputs.cache-dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
   lint-and-test:

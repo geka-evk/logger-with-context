@@ -16,9 +16,10 @@ runs:
     - name: Get npm-cache folder
       id: npm-cache-dir
       shell: bash
-      run: |
-        echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-        echo "::set-output name=cache-dir::$(npm config get cache)"
+      run: echo "{cache-dir}={$(npm config get cache)}" >> $GITHUB_OUTPUT
+#      run: |
+#        echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+#        echo "::set-output name=cache-dir::$(npm config get cache)"
       # by default, it should be ~/.npm
 
     - name: Restore npm cache
