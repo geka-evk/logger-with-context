@@ -1,5 +1,6 @@
 export { default } from './Logger';
+export * from './types';
 
-const STR: string = 'log';
+export const STR: string = 'log';
 
 console.log(STR);
