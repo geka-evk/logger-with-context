@@ -1,4 +1,4 @@
-name: Main CI Workflow (Lint/Tests + Build/Publish)
+name: Main CI (lint/tests + build/publish)
 
 on:
   workflow_call:
@@ -18,7 +18,7 @@ on:
       - synchronize
 
 jobs:
-  lint-and-test:
+  install-and-cache:
     runs-on: ubuntu-latest
 
     steps:
@@ -53,24 +53,60 @@ jobs:
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      #          key: ${{ steps.npm-cache-restore.outputs.cache-primary-key }}
+
+  lint-and-test:
+    runs-on: ubuntu-latest
+    needs: install-and-cache
+
+    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#          ssh-key: "${{ secrets.COMMIT_KEY }}"
+#
+#      - name: Setup Node
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 20
+#          cache: 'npm'
+#
+#      - name: Get npm-cache folder
+#        id: npm-cache-dir
+#        shell: bash
+#        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}  # by default, it should be ~/.npm
+#
+#      - name: Restore npm cache
+#        id: npm-cache-restore
+#        uses: actions/cache/restore@v4
+#        with:
+#          path: ${{ steps.npm-cache-dir.outputs.dir }}
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#
+#      - run: npm ci
+#
+#      - name: Save npm cache
+#        id: npm-cache-save
+#        uses: actions/cache/save@v4
+#        with:
+#          path: ${{ steps.npm-cache-dir.outputs.dir }}
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - run: npm run lint
       - run: npm run test
 
 
   publish:
-    needs: lint-and-test
     runs-on: ubuntu-latest
+    needs: lint-and-test
 
     steps:
-      - uses: actions/checkout@v4
+#      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       # todo: think, if we can use cache from previous job
-      - run: npm ci
+#      - run: npm ci
       - run: npm run build
       - run: npm publish
         env:

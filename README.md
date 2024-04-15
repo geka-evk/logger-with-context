@@ -1,2 +1,2 @@
-# context-logger
+# logger-with-context
 Logger with context
