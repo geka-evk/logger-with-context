@@ -18,11 +18,12 @@ runs:
       shell: bash
       run: |
         echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+        echo "::set-output name=cache-dir::$(npm config get cache)"
       # by default, it should be ~/.npm
 
     - name: Restore npm cache
       id: npm-cache-restore
       uses: actions/cache/restore@v4
       with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        path: ${{ steps.npm-cache-dir.outputs.cache-dir }}
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}

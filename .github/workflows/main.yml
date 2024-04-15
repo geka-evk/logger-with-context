@@ -28,8 +28,8 @@ jobs:
           ssh-key: "${{ secrets.COMMIT_KEY }}"
 
       - name: Use get-npm-cache Action
-        uses: ./.github/actions/npm-cache
         id: npm-cache-dir
+        uses: ./.github/actions/npm-cache
 
       - run: npm ci
 
@@ -37,7 +37,8 @@ jobs:
         id: npm-cache-save
         uses: actions/cache/save@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+#          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ steps.npm-cache-action.outputs.cache-dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
   lint-and-test:
