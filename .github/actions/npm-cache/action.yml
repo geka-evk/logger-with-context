@@ -5,6 +5,14 @@ runs:
   using: 'composite'
 
   steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+        # todo: try to pass registry-url and use it only for publish job
+
     - name: Get npm-cache folder
       id: npm-cache-dir
       shell: bash
