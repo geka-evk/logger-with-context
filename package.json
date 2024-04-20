@@ -1,7 +1,7 @@
 {
   "name": "logger-with-context",
   "description": "Logger with context",
-  "version": "0.1.1",
+  "version": "0.1.2-snapshot.2",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsup",
-    "pre-release": "npx standard-version --no-verify --skip.changelog --prerelease rc --releaseCommitMessageFormat 'chore(pre-release): {{currentTag}}'",
+    "snapshot": "npx --no -- standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
     "prepare": "husky || true"
   },
   "devDependencies": {

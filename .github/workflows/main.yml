@@ -1,11 +1,10 @@
-name: Main CI (lint/tests + build/publish)
+name: Main CI (install/cache + lint/tests)
 
 on:
   workflow_call:
-  push:
-    branches:
-      - master
-
+#  push:
+#    branches:
+#      - master
   pull_request:
     branches:
       - master
