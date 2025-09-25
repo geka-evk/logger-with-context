@@ -1,7 +1,7 @@
 {
   "name": "logger-with-context",
   "description": "Logger with context",
-  "version": "0.1.2-snapshot.2",
+  "version": "0.1.2-snapshot.3",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
