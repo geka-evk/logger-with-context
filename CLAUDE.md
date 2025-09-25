@@ -42,6 +42,6 @@ Tests are located in `/test/` directory with `*.test.ts` naming convention. The 
 ## Development Notes
 
 - The logger interface is incomplete (marked with TODO comment)
-- Node.js version requirement: >=20
+- Node.js version requirement: >=22
 - Uses Husky for git hooks with commitlint for conventional commits
 - Package is published to NPM with snapshot versioning support

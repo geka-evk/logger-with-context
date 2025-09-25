@@ -20,7 +20,8 @@
     "dep:check": "npx --no-install ncu -e 2",
     "dep:update": "npx --no-install ncu -u",
     "snapshot": "npx --no -- standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@commitlint/cli": "20.0.0",
@@ -60,6 +61,6 @@
     "url": "https://github.com/geka-evk/context-logger.git"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }
