@@ -1,7 +1,7 @@
 {
   "name": "logger-with-context",
   "description": "Logger with context",
-  "version": "0.1.2-snapshot.3",
+  "version": "0.1.2-snapshot.4",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "jest": "^30.1.3",
-    "lint-staged": "^16.2.0",
+    "lint-staged": "^16.2.1",
     "npm-check-updates": "18.3.0",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.4",
