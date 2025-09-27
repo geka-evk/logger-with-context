@@ -9,26 +9,32 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+-snapshot.[0-9]+'
 
+permissions:
+  contents: read
+  id-token: write # For provenance
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Use get-npm-cache Action
         uses: ./.github/actions/npm-cache
-      - run: npm ci
 
-      - run: npm run test
-      - run: npm run build
+      - name: Install dependencies
+        run: npm ci --omit=dev
 
-      - name: Setup Node.js for publishing
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          registry-url: 'https://registry.npmjs.org'
+      - name: Build package
+        run: npm run build
 
-      - run: npm publish
+      - name: Run tests
+        run: npm run test
+
+      - name: Publish to NPM
+        run: npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

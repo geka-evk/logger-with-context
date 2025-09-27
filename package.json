@@ -1,7 +1,7 @@
 {
   "name": "logger-with-context",
   "description": "Logger with context",
-  "version": "0.1.2-snapshot.5",
+  "version": "0.1.2-snapshot.7",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -9,16 +9,19 @@
     "dist"
   ],
   "scripts": {
-    "start:dev": "ts-node src/index.ts",
+    "build": "npm run type:check && tsup",
+    "type:check": "tsc --noEmit",
     "test": "jest --testMatch='**/test/**/*.test.ts'",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write ./src/**/*.ts ./test/**/*.ts",
-    "build": "tsup",
     "audit:fix": "npm audit fix",
     "audit:check": "npx audit-ci --config ./audit-ci.jsonc",
     "dep:check": "npx --no-install ncu -e 2",
     "dep:update": "npx --no-install ncu -u",
+    "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
     "snapshot": "npx --no -- standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
     "prepare": "husky || true",
     "prepublishOnly": "npm run build"
@@ -39,17 +42,23 @@
     "npm-check-updates": "18.3.0",
     "prettier": "3.6.2",
     "ts-jest": "29.4.4",
+    "standard-version": "^9.5.0",
     "ts-node": "10.9.2",
     "tsup": "8.5.0",
     "typescript": "5.9.2"
   },
   "lint-staged": {
     "./src/*.ts": [
-      "eslint . --fix",
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "./test/*.ts": [
+      "eslint --fix",
       "prettier --write --ignore-unknown"
     ]
   },
   "keywords": [
+    "log",
     "logger",
     "logging",
     "context"
