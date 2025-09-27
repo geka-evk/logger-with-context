@@ -17,7 +17,6 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        node: true,
         console: 'readonly',
         process: 'readonly',
         Buffer: 'readonly',
@@ -31,8 +30,13 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
-      quotes: ['error', 'single', { avoidEscape: true }],
+      '@typescript-eslint/no-explicit-any': 'error',
+      'no-console': 'error',
       'quote-props': ['error', 'as-needed'],
+      quotes: ['error', 'single', { allowTemplateLiterals: false }],
+      indent: ['error', 2, { SwitchCase: 1 }],
+      semi: ['error', 'always'],
+      'object-curly-spacing': ['error', 'always'],
     },
   },
   {
